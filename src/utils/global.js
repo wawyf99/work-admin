@@ -5,7 +5,7 @@
 //本地环境
 //global.baseUrl = "http://localhost:3030";
 //正式环境
-global.baseUrl = "http://working.admin.rzzc.ltd";
+global.baseUrl = "http://working.api.rzzc.ltd";
 //api全局路由
 global.url = {
   login: '/admin/login', //用户登录
