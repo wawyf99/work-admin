@@ -1,8 +1,8 @@
 <template>
   <div class="login-new">
     <div class="login-header">
-      <div class="login-image"></div>
-      <div class="login-text">点海科技-陕西麻将新版运营后台</div>
+      <!--<div class="login-image"></div>-->
+      <div class="login-text">运营后台</div>
     </div>
     <Form ref="formInline" :model="formInline" :rules="ruleInline" inline class="Login-form">
       <FormItem prop="user">
@@ -28,7 +28,7 @@
     data () {
       return {
         formInline: {
-          user: 'dianhai',
+          user: 'wawyf99',
           password: '123456'
         },
         ruleInline: {

@@ -6,7 +6,7 @@
     <Layout>
       <Header>
         <Menu mode="horizontal" theme="dark" active-name="1">
-          <div class="layout-logo">陕西麻将运营后台</div>
+          <div class="layout-logo">运营后台</div>
           <div class="Main-header-right">
             <Dropdown trigger="click">
               <Button type="primary">
@@ -62,7 +62,7 @@
           </Layout>
         </Content>
       </Layout>
-      <Footer class="layout-footer-center">2017-2018 &copy; 深圳市点海科技有限公司</Footer>
+      <Footer class="layout-footer-center">2017-2018 &copy; 深圳市XX科技有限公司</Footer>
     </Layout>
     <Modal v-model="modal" @on-ok="update" @on-cancel="cancel" title="提现审核">
       <Form :model="form" ref="form" :label-width="100">

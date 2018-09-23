@@ -3,12 +3,9 @@
  * 全局变量
  */
 //本地环境
-global.baseUrl = "http://localhost:3030";
-global.baseUrl = "http://localhost:3030";
-//测试环境
-//global.baseUrl = "http://newapi.test.sxmj.szdhkj.com.cn";
+//global.baseUrl = "http://localhost:3030";
 //正式环境
-//global.baseUrl = "http://mj.adminapi.dh.szdhkj.com.cn";
+global.baseUrl = "http://working.admin.rzzc.ltd";
 //api全局路由
 global.url = {
   login: '/admin/login', //用户登录
