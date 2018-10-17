@@ -33,3 +33,10 @@
   margin-left: 10px;
   font-size: 14px;
 }
+.manage-title .ivu-btn{
+  margin-right: 10px;
+}
+.ivu-icon:before,
+.ivu-icon:after {
+  font-family: Ionicons !important;
+}

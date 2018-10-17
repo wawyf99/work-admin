@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import main from '../views/main.vue'
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [
@@ -145,6 +145,27 @@ export default new Router({
           name: '运营后台 / 商务数据 / 返利比例',
           component: resolve => require(['@/views/operation/individual-rebate'], resolve),
         },
+        {
+          path: '/chat/manage-title',
+          name: '运营后台 / 群聊管理 / 内容管理',
+          component: resolve => require(['@/views/chat/manage-title'], resolve),
+        },
+        {
+          path: '/chat/add-title',
+          name: '运营后台 / 群聊管理 / 新增内容',
+          component: resolve => require(['@/views/chat/add-title'], resolve),
+        },
+        {
+          path: '/domain/domain-list',
+          name: '运营后台 / 域名管理 / 域名列表',
+          component: resolve => require(['@/views/domain/domain-list'], resolve),
+        },
+        {
+          path: '/domain/domain-add',
+          name: '运营后台 / 域名管理 / 新增域名',
+          component: resolve => require(['@/views/domain/domain-add'], resolve),
+        }
+
       ]
     }
   ]
