@@ -15,8 +15,8 @@
       </FormItem>
       <FormItem label="是否随机" prop="rand" style="width: 320px">
         <RadioGroup v-model="formValidate.rand">
-          <Radio label="1" >不随机</Radio>
-          <Radio label="2" >随机</Radio>
+          <Radio label= '1' >不随机</Radio>
+          <Radio label= '2' >随机</Radio>
         </RadioGroup>
       </FormItem>
       <FormItem label="排序" prop="sort" style="width: 320px">
@@ -106,13 +106,16 @@
       },
       sendData (){
         let self = this,
+            id = this.id,
             _website = this.formValidate.website;
+
         self.$http.post(global.url.domain_add, {
           website: _website,
           mark: this.formValidate.mark,
           gid: this.formValidate.gid,
           rand: this.formValidate.rand,
-          sort: this.formValidate.sort
+          sort: this.formValidate.sort,
+          id: id
         }).then(result => {
           if(result.status){
             this.$Message.success(result.msg);
@@ -126,14 +129,16 @@
       },
       getData(id){
         var self = this;
-        self.$http.post(global.url.chat_get_title, {
+        self.$http.post(global.url.domain_one_list, {
           id : id
         }).then(result => {
+          console.log(typeof (result.data[0].rand));
           if(result.status){
-            this.formValidate.title = result.data[0].title;
-            this.formValidate.img = result.data[0].img;
-            this.formValidate.enrollment = parseInt(result.data[0].enrollment);
-            this.formValidate.invitor = result.data[0].invitor;
+            this.formValidate.website = result.data[0].domain;
+            this.formValidate.mark = result.data[0].mark.toString();
+            this.formValidate.rand = result.data[0].rand.toString();
+            this.formValidate.gid = result.data[0].gid;
+            this.formValidate.sort = result.data[0].sort;
           }
         });
       }

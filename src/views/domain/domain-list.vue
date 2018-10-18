@@ -4,7 +4,30 @@
     <div class="content-bar">
       <Form inline>
         <FormItem label="关键词:" :label-width="80">
-          <Input v-model="keywords" placeholder="请输入关键词..." style="width: 200px"></Input>
+          <Input v-model="keywords" placeholder="请输入域名/分类/公众号ID..." style="width: 200px"></Input>
+        </FormItem>
+        <FormItem label="是否随机:" prop="rand" :label-width="80">
+          <RadioGroup v-model="rand">
+            <Radio label= '1' >不随机</Radio>
+            <Radio label= '2' >随机</Radio>
+          </RadioGroup>
+        </FormItem>
+        <FormItem label="状态:" prop="status" :label-width="60">
+          <RadioGroup v-model="status">
+            <Radio label= '0' >封禁</Radio>
+            <Radio label= '1' >正常</Radio>
+            <Radio label= '2' >暂停</Radio>
+            <Radio label= '3' >删除</Radio>
+          </RadioGroup>
+        </FormItem>
+        <FormItem label="排序:" prop="sorts" :label-width="60">
+          <RadioGroup v-model="sorts">
+            <Radio label= '1' >默认排序</Radio>
+            <Radio label= '2' >按创建时间</Radio>
+            <Radio label= '3' >按创建时间倒序</Radio>
+            <Radio label= '4' >按封禁时间</Radio>
+            <Radio label= '5' >按封禁时间倒序</Radio>
+          </RadioGroup>
         </FormItem>
         <FormItem :label-width="0">
           <Button type="primary" icon="ios-search" @click="getList()">查询</Button>
@@ -14,7 +37,6 @@
           <Button type="warning" icon="plus" @click="add()">新增域名</Button>
         </FormItem>
       </Form>
-
     </div>
     <Table border :columns="columns" :data="list"></Table>
   </div>
@@ -27,6 +49,9 @@
     data() {
       return {
         keywords: '',
+        status:'',
+        rand:'',
+        sorts: '1',
         columns: [
           {
             title: "编号",
@@ -61,9 +86,9 @@
             render(h, params) {
               let _str = '';
               if(params.row.rand == '1' ){
-                _str = '随机';
-              }else{
                 _str = '不随机';
+              }else{
+                _str = '随机';
               }
               return h("div", _str);
             }
@@ -71,7 +96,15 @@
           {
             title: "公众号ID",
             align: "center",
-            key: "gid"
+            render(h, params) {
+              let _str = '';
+              if(params.row.gid == null ){
+                _str = '-';
+              }else{
+                _str = params.row.gid;
+              }
+              return h("div", _str);
+            }
           },
           {
             title: "当前排序",
@@ -81,12 +114,28 @@
           {
             title: "创建时间",
             align: "center",
-            key: "create_time"
+            render(h, params) {
+              let _time = params.row.create_time;
+              if(_time != null){
+                _time = new Date(_time).Format("yyyy-mm-dd hh:ss:ii");
+              }else{
+                _time = '-'
+              }
+              return h("div", _time);
+            }
           },
           {
             title: "封禁时间",
             align: "center",
-            key: "close_time"
+            render(h, params) {
+              let _time = params.row.close_time;
+              if(_time != null){
+                _time = new Date(_time).Format("yyyy-mm-dd hh:ss:ii");
+              }else{
+                _time = '-'
+              }
+              return h("div", _time);
+            }
           },
           {
             title: "状态",
@@ -95,8 +144,12 @@
               let _str = '';
               if(params.row.status == '1' ){
                 _str = '正常';
+              }else if(params.row.status == '2'){
+                _str = '暂停';
+              }else if(params.row.status == '3'){
+                _str = '删除';
               }else{
-                _str = '禁用';
+                _str = '禁封';
               }
               return h("div", _str);
             }
@@ -105,49 +158,64 @@
             title: "操作",
             align: "center",
             render: (h, params) => {
-              let _str = '';
-              if(params.row.status == '1' ){
-                _str = '禁用';
-              }else{
-                _str = '启用';
-              }
-              return h("div", [
 
-                h("Button",{
-                    props: {
-                      size: "small"
-                    },
-                    on: {
-                      "click": () => {
-                        this.operation(params.row.id, params.row.status);
-                      }
-                    },
-                  },
-                  _str
-                ),
-                h("Button",{
-                  props: {
-                    size: "small"
-                  }
-                }, [
-                  h(
-                    "Poptip",
-                    {
+              if(params.row.status == '3' || params.row.status == '0'){
+                return h("div", '/');
+              }else{
+                let _str = '';
+                if(params.row.status == '1' ){
+                  _str = '暂停';
+                }else{
+                  _str = '启用';
+                }
+                return h("div", [
+                  h("Button",{
                       props: {
-                        confirm: true,
-                        title: "确定删除?",
+                        size: "small"
                       },
                       on: {
-                        "on-ok": () => {
-                          this.deleteTitle(params.row.id);
-                        },
-                      }
+                        "click": () => {
+                          this.update(params.row.id);
+                        }
+                      },
                     },
-                    "删除"
-                  )
-                ])
-              ]);
-
+                    "编辑"
+                  ),
+                  h("Button",{
+                      props: {
+                        size: "small"
+                      },
+                      on: {
+                        "click": () => {
+                          this.operation(params.row.id, params.row.status);
+                        }
+                      },
+                    },
+                    _str
+                  ),
+                  h("Button",{
+                    props: {
+                      size: "small"
+                    }
+                  }, [
+                    h(
+                      "Poptip",
+                      {
+                        props: {
+                          confirm: true,
+                          title: "确定删除?",
+                        },
+                        on: {
+                          "on-ok": () => {
+                            this.deleteTitle(params.row.id);
+                          },
+                        }
+                      },
+                      "删除"
+                    )
+                  ])
+                ]);
+              }
             }
           }
 
@@ -161,15 +229,24 @@
     methods: {
       getList:function () {
         var self = this,
-          keywords = this.keywords;
+          keywords = this.keywords,
+          status = this.status,
+          sorts = this.sorts,
+          rand = this.rand;
         self.$http.post(global.url.domain_list, {
-          keywords: keywords
+          keywords: keywords,
+          status : status,
+          rand : rand,
+          sorts : sorts
         }).then(result => {
           this.list = result;
         });
       },
       cleanBox:function () {
         this.keywords = '';
+        this.rand = '';
+        this.status = '';
+        this.sorts = '1';
       },
       deleteTitle:function (id) {
         var self = this;
@@ -185,6 +262,9 @@
             this.$Message.error(result.msg);
           }
         });
+      },
+      update:function(id){
+        this.$router.push({path: '/domain/domain-add', query: {'id':id}});
       },
       operation:function (id, status) {
         var self = this;
