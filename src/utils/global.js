@@ -37,6 +37,7 @@ global.url = {
   domain_operation: '/domain/operation',  //禁用
   domain_list: '/domain/domainList',  //新增域名
   domain_one_list: '/domain/domainOneList',  //新增域名
+  domain_timer: '/domain/domainTimer',  //管理定时任务
 
   log: '/log', //获取日志列表
   issue: '/report/issue', //问题反馈

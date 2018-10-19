@@ -36,6 +36,10 @@
         <FormItem :label-width="0">
           <Button type="warning" icon="plus" @click="add()">新增域名</Button>
         </FormItem>
+        <!--<FormItem :label-width="0">
+          <Button type="success" @click="openTimer()" icon="android-warning" v-if="timer == 2">定时任务开启中(点击关闭)</Button>
+          <Button type="error" @click="openTimer()" icon="android-warning" v-else-if="timer == 1">定时任务已关闭(点击开启)</Button>
+        </FormItem>-->
       </Form>
     </div>
     <Table border :columns="columns" :data="list"></Table>
@@ -52,6 +56,7 @@
         status:'',
         rand:'',
         sorts: '1',
+        timer: '',
         columns: [
           {
             title: "编号",
@@ -239,7 +244,8 @@
           rand : rand,
           sorts : sorts
         }).then(result => {
-          this.list = result;
+          this.list = result.data;
+          this.timer = result.timer;
         });
       },
       cleanBox:function () {
@@ -248,6 +254,16 @@
         this.status = '';
         this.sorts = '1';
       },
+      /*openTimer:function(){
+        var self = this;
+        self.$http.post(global.url.domain_timer, {
+          timer : this.timer
+        }).then(result => {
+          if(result){
+            this.timer = result;
+          }
+        });
+      },*/
       deleteTitle:function (id) {
         var self = this;
         self.$http.post(global.url.domain_delete, {
