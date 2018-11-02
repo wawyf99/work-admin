@@ -38,7 +38,7 @@
     data () {
       const validateDomain = (rule, value, callback) => {
         let _reg = new RegExp();
-        _reg.compile('^(?=^.{3,255}$)(www\\.)[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+(:\\d+)*(\\/\\w+\\.\\w+)*$');
+        _reg.compile('^(?=^.{3,255}$)[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+(:\\d+)*(\\/\\w+\\.\\w+)*$');
         if(value == ''){
           callback(new Error('录入域名不能为空'));
         }else if (!_reg.test(value)) {
