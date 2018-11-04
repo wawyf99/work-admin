@@ -3,7 +3,7 @@
  * 全局变量
  */
 //本地环境
-//global.baseUrl = "http://localhost:3030";
+/*global.baseUrl = "http://localhost:3030";*/
 //正式环境
 global.baseUrl = "http://working.api.rzzc.ltd";
 //api全局路由
@@ -31,6 +31,12 @@ global.url = {
   chat_get_title: '/chat/getTitle', //获取单条内容
   chat_delete_title: '/chat/deleteTitle', //删除内容
   chat_manage_title: '/chat/manageTitle', //管理群聊信息
+
+  chat_wx_share_list: '/chat/wxShareList',  //微信分享自定义列表
+  chat_wx_share_add: '/chat/wxShareAdd', //微信自定义分享新增
+  chat_wx_share_operation: '/chat/wxShareOperation',  //禁用
+  chat_wx_share_one_list: '/chat/wxShareOne',  //查询记录
+  chat_wx_delete: '/chat/wxShareDelete',  //删除
 
   domain_add: '/domain/domainAdd',  //新增域名
   domain_delete: '/domain/domainDelete',  //新增域名

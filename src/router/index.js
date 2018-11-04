@@ -151,6 +151,16 @@ export default new Router({
           component: resolve => require(['@/views/chat/manage-title'], resolve),
         },
         {
+          path: '/chat/wx-share',
+          name: '运营后台 / 群聊管理 / 自定义分享',
+          component: resolve => require(['@/views/chat/wx-share'], resolve),
+        },
+        {
+          path: '/chat/wx-share-add',
+          name: '运营后台 / 群聊管理 / 自定义分享',
+          component: resolve => require(['@/views/chat/wx-share-add'], resolve),
+        },
+        {
           path: '/chat/add-title',
           name: '运营后台 / 群聊管理 / 新增内容',
           component: resolve => require(['@/views/chat/add-title'], resolve),
