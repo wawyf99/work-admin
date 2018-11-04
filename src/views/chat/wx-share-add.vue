@@ -9,17 +9,13 @@
         <Input v-model="formValidate.describe" placeholder="请输入分享朋友的描述..."></Input>
       </FormItem>
       <FormItem label="分享朋友LOGO" prop="logo" style="width: 320px">
-        <Select v-model="formValidate.logo" placeholder="请选择域名分类...">
-          <Option v-for="item in markList" :value="item.value" :key="item.value">{{ item.label }}</Option>
-        </Select>
+        <Input v-model="formValidate.logo" placeholder="请输入图片链接..."></Input>
       </FormItem>
       <FormItem label="分享朋友圈标题" prop="flock_title" style="width: 320px">
         <Input v-model="formValidate.flock_title" placeholder="请输入分享朋友圈的标题..."></Input>
       </FormItem>
       <FormItem label="分享朋友圈LOGO" prop="flock_logo" style="width: 320px">
-        <Select v-model="formValidate.flock_logo" placeholder="请选择域名分类...">
-          <Option v-for="item in markList" :value="item.value" :key="item.value">{{ item.label }}</Option>
-        </Select>
+        <Input v-model="formValidate.flock_logo" placeholder="请输入图片链接..."></Input>
       </FormItem>
       <FormItem>
         <Button type="primary" @click="handleSubmit('formValidate')">提交</Button>
@@ -63,7 +59,7 @@
             { required: true, message: '分享朋友的描述不能为空', trigger: 'blur' },
           ],
           logo: [
-            { required: true, message: '分享朋友的LOGO不能为空', trigger: 'change' },
+            { required: true, message: '分享朋友的LOGO不能为空', trigger: 'blur' },
           ]
         },
         markList: [
