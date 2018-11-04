@@ -46,25 +46,7 @@
           {
             title: "分享群LOGO",
             align: "center",
-            render: (h, params) => {
-              var _logo = params.row.logo,
-                  _str = '';
-              switch (_logo) {
-                case '1':
-                  _str = 'img1';
-                  break;
-                case '2':
-                  _str = 'img2';
-                  break;
-                case '3':
-                  _str = 'img3';
-                  break;
-                case '4':
-                  _str = 'img4';
-                  break;
-              }
-              return h("div", _str);
-            }
+            key: "logo"
           },
           {
             title: "分享朋友圈标题",
@@ -74,25 +56,7 @@
           {
             title: "分享朋友圈LOGO",
             align: "center",
-            render: (h, params) => {
-              var _logo = params.row.flock_logo,
-                _str = '';
-              switch (_logo) {
-                case '1':
-                  _str = 'img1';
-                  break;
-                case '2':
-                  _str = 'img2';
-                  break;
-                case '3':
-                  _str = 'img3';
-                  break;
-                case '4':
-                  _str = 'img4';
-                  break;
-              }
-              return h("div", _str);
-            }
+            key: "flock_logo"
           },
           {
             title: "状态",
